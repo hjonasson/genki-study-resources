@@ -1754,7 +1754,7 @@
           content : mapEnded ? 'The last input field has been filled in. Are you ready to check your answers?' : 'Checking your answers will end the quiz. Do you want to continue?',
           buttonText : 'Yes, check my answers!',
           
-          callback : function () {
+          callback : async function () {
             Genki.exerciseComplete = true;
 
             // hide check answers button
@@ -1789,6 +1789,7 @@
             
             // standard written quizzes
             else {
+              var db = new Dexie("this_thing");
               // loop over the inputs and check to see if the answers are correct
               var input = document.querySelectorAll('#exercise .writing-zone-input'),
                   i = 0, j = input.length, k, correct, val, data, answer, alt;
@@ -1858,6 +1859,12 @@
 
                 // disable the input
                 input[i].disabled = true;
+                await db.here.bulkPut([...input].map((i, id) => {
+                  return {
+                    id,
+                    ...Object.assign({}, i.dataset)
+                  }
+                }))
               }
             }
 
