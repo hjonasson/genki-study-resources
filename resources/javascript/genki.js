@@ -1862,11 +1862,11 @@
 
                 // disable the input
                 input[i].disabled = true;
-                var storeName2 = 'helloname';
-                createStore(storeName2, input[0].dataset);
+                var storeName = 'helloname';
+                createStore(storeName, input[0].dataset);
 
                 // save results to indexedDB
-                saveToStore(storeName2, input);
+                saveToStore(storeName, input);
               }
             }
 

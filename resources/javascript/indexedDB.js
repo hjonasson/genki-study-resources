@@ -12,7 +12,7 @@ function createStore(store, dataset) {
 }
 
 async function saveToStore(store, input) {
-    await db[store].bulkPut([...input].map(({ dataset }, id) => {
+    await db.table(store).bulkPut([...input].map(({ dataset }, id) => {
         return {
             id,
             ...Object.assign({}, dataset)
