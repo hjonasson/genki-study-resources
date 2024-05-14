@@ -114,36 +114,11 @@ layout: layout.html
       <div>
         <h2 id="quick-nav">Quick Navigation</h2>
         <ul id="quick-nav-list">
+          <| for folder in collections.chapterFolders|>
           <li>
-            <a href="#lesson-0">Lesson 0: Writing System and Greetings</a>
+            <a href="{{folder.href}}">{{folder.title}}</a>
           </li>
-          <li><a href="#lesson-1">Lesson 1: New Friends</a></li>
-          <li><a href="#lesson-2">Lesson 2: Shopping</a></li>
-          <li><a href="#lesson-3">Lesson 3: Making a Date</a></li>
-          <li><a href="#lesson-4">Lesson 4: The First Date</a></li>
-          <li><a href="#lesson-5">Lesson 5: A Trip to Okinawa</a></li>
-          <li><a href="#lesson-6">Lesson 6: A Day in Robert's Life</a></li>
-          <li><a href="#lesson-7">Lesson 7: Family Picture</a></li>
-          <li><a href="#lesson-8">Lesson 8: Barbecue</a></li>
-          <li><a href="#lesson-9">Lesson 9: Kabuki</a></li>
-          <li><a href="#lesson-10">Lesson 10: Winter Vacation Plans</a></li>
-          <li><a href="#lesson-11">Lesson 11: After the Vacation</a></li>
-          <li><a href="#lesson-12">Lesson 12: Feeling Ill</a></li>
-          <li>
-            <a href="#lesson-13">Lesson 13: Looking for a Part-time Job</a>
-          </li>
-          <li><a href="#lesson-14">Lesson 14: Valentine's Day</a></li>
-          <li><a href="#lesson-15">Lesson 15: A Trip to Nagano</a></li>
-          <li><a href="#lesson-16">Lesson 16: Lost and Found</a></li>
-          <li><a href="#lesson-17">Lesson 17: Grumble and Gossip</a></li>
-          <li><a href="#lesson-18">Lesson 18: John's Part-time Job</a></li>
-          <li><a href="#lesson-19">Lesson 19: Meeting the Boss</a></li>
-          <li><a href="#lesson-20">Lesson 20: Mary's Shopping</a></li>
-          <li><a href="#lesson-21">Lesson 21: Burglar</a></li>
-          <li><a href="#lesson-22">Lesson 22: Education in Japan</a></li>
-          <li><a href="#lesson-23">Lesson 23: Good-bye</a></li>
-          <li><a href="#appendix">Appendix</a></li>
-          <li><a href="#study-tools">Study Tools</a></li>
+          <| endfor |>
         </ul>
       </div>
 

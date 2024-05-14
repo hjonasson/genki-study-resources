@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("resources/**/*");
@@ -6,6 +9,23 @@ module.exports = function (eleventyConfig) {
     const allLessons = collection.getFilteredByGlob("lessons/**/index.html")
     const groupedLessons = groupBy(allLessons, ({ inputPath }) => inputPath.split('/')[2])
     return [...groupedLessons.entries()]
+  })
+
+  // Add chapters to list them on the front page
+  eleventyConfig.addCollection("chapterFolders", function (collection) {
+    // Path to the lessons
+    const lessonsDirectory = 'lessons';
+    // Use fs.readdirSync() to get an array of all files and directories in the lessonsDirectory
+    const chapters = fs.readdirSync(lessonsDirectory, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(({ name }) => name).sort(sortLessonFiles);
+    // read the associated json files. This is because eleventy doesn't let us only get the top level data
+    return chapters.map(chapter => {
+      // Construct the path to the JSON file
+      const jsonFilePath = path.join(lessonsDirectory, chapter, `${chapter}.json`);
+      // Read the JSON file
+      return readJSONData(jsonFilePath);
+    });
   })
   return eleventyConfig
 };
@@ -35,4 +55,29 @@ function groupBy(list, keyGetter) {
     }
   });
   return map;
+}
+
+function readJSONData(jsonFilePath) {
+  // Read the JSON file
+  try {
+    const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
+    return JSON.parse(jsonData);
+  } catch (error) {
+    console.error(`Error reading JSON file for chapter ${chapter}:`, error);
+    return null; // Return null or handle the error as needed
+  }
+}
+
+function sortLessonFiles(a, b) {
+  // Yet to generalize this sorting logic
+  // If a or b is "appendix" or "study-tools", sort them to the end
+  if (a === "appendix" || a === "study-tools") return 1;
+  if (b === "appendix" || b === "study-tools") return -1;
+
+  // Extract numeric parts from strings, if any
+  const numA = parseInt(a.match(/\d+/)?.[0]) ?? Infinity; // If no numeric part, treat as Infinity
+  const numB = parseInt(b.match(/\d+/)?.[0]) ?? Infinity; // If no numeric part, treat as Infinity
+
+  // Compare the extracted numeric parts
+  return numA - numB;
 }
