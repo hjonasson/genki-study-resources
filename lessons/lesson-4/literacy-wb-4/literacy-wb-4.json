@@ -2,5 +2,8 @@
     "lesson_title": "Lesson 4: The First Date (Genki I: p.102-127)",
     "link": "lessons/lesson-4/literacy-wb-4/",
     "title": "Workbook: Spelling Practice (\u6728, \u91d1, \u571f, and \u66dc)",
-    "page_numbers": "p.131; bonus"
+    "page_numbers": "p.131; bonus",
+    "sub_title_class": "workbook-title",
+    "sub_title_id": "literacy-workbook-3",
+    "sub_title": "Workbook: Reading and Writing (Genki I Workbook: p.129-130)"
 }

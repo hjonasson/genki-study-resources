@@ -14,8 +14,28 @@ for lesson in lessons:
         href = link["href"]
         title = link.get_text(strip=True)
         page_numbers = (
-            link.find_next_sibling(text=True).strip().replace("(", "").replace(")", "")
+            (
+                link.find_next_sibling(text=True)
+                .strip()
+                .replace("(", "")
+                .replace(")", "")
+            )
+            if link.find_next_sibling(text=True)
+            else ""
         )
+        # Find the preceding h3 header class
+        preceding_header = lesson.find_previous("h3")
+        if preceding_header:
+            sub_title_class = preceding_header.get("class", [""])[0]
+            sub_title_id = preceding_header.get("id")
+            sub_title = preceding_header.get_text(strip=True)
+        else:
+            sub_title_class = ""
+            sub_title_id = ""
+            sub_title = ""
+        print(f"Sub Title Class: {sub_title_class}")
+        print(f"Sub Title Id: {sub_title_id}")
+        print(f"Sub Title: {sub_title}")
         print(f"Lesson Title: {lesson_title}")
         print(f"Link: {href}")
         print(f"Title: {title}")
@@ -33,6 +53,9 @@ for lesson in lessons:
             "link": href,
             "title": title,
             "page_numbers": page_numbers,
+            "sub_title_class": sub_title_class,
+            "sub_title_id": sub_title_id,
+            "sub_title": sub_title,
         }
         # Write the data to a JSON file
         with open(file_path, "w") as json_file:

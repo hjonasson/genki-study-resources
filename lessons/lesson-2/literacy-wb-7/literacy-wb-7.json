@@ -2,5 +2,8 @@
     "lesson_title": "Lesson 2: Shopping (Genki I: p.58-83)",
     "link": "lessons/lesson-2/literacy-wb-7/",
     "title": "Workbook: Katakana Writing Practice (\u30de-\u30e8)",
-    "page_numbers": "p.127; I"
+    "page_numbers": "p.127; I",
+    "sub_title_class": "workbook-title",
+    "sub_title_id": "literacy-workbook-1",
+    "sub_title": "Workbook: Reading and Writing (Genki I Workbook: p.117-123)"
 }
